@@ -22,9 +22,6 @@ class TaskReviewResource extends Resource
             ->schema([
                 Forms\Components\Select::make('task_id')
                     ->relationship('task', 'name')
-                    ->searchable()
-                    ->native(false)
-                    ->preload()
                     ->required(),
                 Forms\Components\TextInput::make('link')
                     ->required(),
@@ -41,14 +38,15 @@ class TaskReviewResource extends Resource
                 Tables\Columns\TextColumn::make('task.name')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('task.user.name')
-                    ->label('Supervisor')
+                Tables\Columns\TextColumn::make('team.name')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('task.student.name')
-                    ->label('Submitted by')
+                Tables\Columns\TextColumn::make('user.name')
+                    ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('link')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('status')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
@@ -64,7 +62,6 @@ class TaskReviewResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\ViewAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -73,10 +70,19 @@ class TaskReviewResource extends Resource
             ]);
     }
 
+    public static function getRelations(): array
+    {
+        return [
+            //
+        ];
+    }
+
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ManageTaskReviews::route('/'),
+            'index' => Pages\ListTaskReviews::route('/'),
+            'create' => Pages\CreateTaskReview::route('/create'),
+            'edit' => Pages\EditTaskReview::route('/{record}/edit'),
         ];
     }
 }

@@ -4,9 +4,9 @@ namespace App\Filament\Resources\TaskReviewResource\Pages;
 
 use App\Filament\Resources\TaskReviewResource;
 use Filament\Actions;
-use Filament\Resources\Pages\ManageRecords;
+use Filament\Resources\Pages\ListRecords;
 
-class ManageTaskReviews extends ManageRecords
+class ListTaskReviews extends ListRecords
 {
     protected static string $resource = TaskReviewResource::class;
 

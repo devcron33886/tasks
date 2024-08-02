@@ -26,7 +26,12 @@ class TaskResource extends Resource
                 Forms\Components\Select::make('student_id')
                     ->label('Assigned to student')
                     ->options(
-                        \App\Models\User::where('team_id', auth()->user()->team_id)->pluck('name', 'id')->toArray()
+                        \App\Models\User::where('team_id', auth()->user()->team_id)
+                            ->whereHas('role', function ($query) {
+                                $query->where('name', 'user'); // Adjust 'name' to the appropriate column name in your roles table
+                            })
+                            ->pluck('name', 'id')
+                            ->toArray()
                     )->searchable()->native(false),
                 Forms\Components\Textarea::make('description')
                     ->required()
