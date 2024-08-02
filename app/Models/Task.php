@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Task extends Model
@@ -32,7 +32,8 @@ class Task extends Model
     {
         return $this->belongsTo(Team::class);
     }
-    public function student():BelongsTo
+
+    public function student(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }

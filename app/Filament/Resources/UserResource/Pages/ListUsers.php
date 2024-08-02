@@ -2,8 +2,8 @@
 
 namespace App\Filament\Resources\UserResource\Pages;
 
-use App\Models\Role;
 use App\Filament\Resources\UserResource;
+use App\Models\Role;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 

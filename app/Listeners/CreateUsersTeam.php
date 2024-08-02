@@ -5,8 +5,6 @@ namespace App\Listeners;
 use App\Models\Role;
 use App\Models\User;
 use Filament\Events\Auth\Registered;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 
 class CreateUsersTeam
 {
@@ -22,7 +20,7 @@ class CreateUsersTeam
 
         $role = Role::where('name', 'team admin')->first();
 
-        $team = $user->ownedTeam()->create(['name' => $user->name . ' Team']);
+        $team = $user->ownedTeam()->create(['name' => $user->name.' Team']);
 
         $user->update([
             'role_id' => $role->id,

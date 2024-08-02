@@ -2,19 +2,17 @@
 
 namespace App\Filament\Resources;
 
-use Illuminate\Support\Facades\Hash;
-use Filament\Notifications\Notification;
-use Illuminate\Validation\Rules\Password;
 use App\Filament\Resources\UserResource\Pages;
-use App\Filament\Resources\UserResource\RelationManagers;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules\Password;
 
 class UserResource extends Resource
 {
@@ -54,8 +52,8 @@ class UserResource extends Resource
                 $query
                     ->where('id', '!=', auth()->id())
                     ->when(auth()->user()->hasRole('team admin'), function (Builder $query) {
-                    return $query->where('team_id', auth()->user()->team_id);
-                });
+                        return $query->where('team_id', auth()->user()->team_id);
+                    });
             })
             ->filters([
                 //
@@ -81,7 +79,7 @@ class UserResource extends Resource
                             ->success()
                             ->title('Password Changed')
                             ->send();
-                    })
+                    }),
             ])
             ->bulkActions([
                 //

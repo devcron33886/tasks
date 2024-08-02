@@ -3,15 +3,12 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\TaskResource\Pages;
-use App\Filament\Resources\TaskResource\RelationManagers;
 use App\Models\Task;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class TaskResource extends Resource
 {
@@ -27,10 +24,10 @@ class TaskResource extends Resource
                     ->required()
                     ->columnSpanFull(),
                 Forms\Components\Select::make('student_id')
-                ->label('Assigned to student')
-                ->options(
-                    \App\Models\User::where('team_id', auth()->user()->team_id)->pluck('name', 'id')->toArray()
-                )->searchable()->native(false),
+                    ->label('Assigned to student')
+                    ->options(
+                        \App\Models\User::where('team_id', auth()->user()->team_id)->pluck('name', 'id')->toArray()
+                    )->searchable()->native(false),
                 Forms\Components\Textarea::make('description')
                     ->required()
                     ->columnSpanFull(),
